@@ -2,7 +2,7 @@
 
 **NeurIPS 2025 Mechanistic Interpretability Workshop**
 
-📄 [Paper](https://openreview.net/pdf?id=jJeWv00Zyg) | 💾 [Model Files (Google Drive)](https://drive.google.com/drive/folders/1zfp0aQ-1SquHTpJFoq8k9SsyQ80CgCWm?usp=sharing)
+📄 [Paper (OpenReview)](https://openreview.net/forum?id=KwxgxWsjE3) | 💾 [Model Files (Google Drive)](https://drive.google.com/drive/folders/1zfp0aQ-1SquHTpJFoq8k9SsyQ80CgCWm?usp=sharing)
 
 ## Abstract
 
@@ -201,7 +201,7 @@ If you use this code or build upon our work, please cite:
   author={Sturgeon, Ben and others},
   booktitle={NeurIPS 2025 Workshop on Mechanistic Interpretability},
   year={2025},
-  url={https://openreview.net/pdf?id=jJeWv00Zyg}
+  url={https://openreview.net/forum?id=KwxgxWsjE3}
 }
 ```
 
