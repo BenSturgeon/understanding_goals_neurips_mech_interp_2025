@@ -1,4 +1,4 @@
-# Understanding Goals in a Maze Solving Agent
+# Entity Multiplexing Through Activation Strength: Understanding goals in A Maze Solving Agent
 
 **NeurIPS 2025 Mechanistic Interpretability Workshop**
 
@@ -195,10 +195,10 @@ python src/analyze_activations.py
 If you use this code or build upon our work, please cite:
 
 ```bibtex
-@inproceedings{sturgeon2025understanding,
-  title={Understanding Goals in a Maze Solving Agent},
-  author={Sturgeon, Ben and others},
-  booktitle={NeurIPS 2025 Workshop on Mechanistic Interpretability},
+@inproceedings{sturgeon2025entity,
+  title={Entity Multiplexing Through Activation Strength: Understanding goals in A Maze Solving Agent},
+  author={Benjamin Sturgeon and Jonathan P. Shock},
+  booktitle={Mechanistic Interpretability Workshop at NeurIPS 2025},
   year={2025},
   url={https://openreview.net/forum?id=KwxgxWsjE3}
 }
