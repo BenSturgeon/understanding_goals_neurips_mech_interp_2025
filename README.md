@@ -1,27 +1,60 @@
-# AI Safety Camp - Model Agents
+# Understanding Goals in a Maze Solving Agent
+
+**NeurIPS 2025 Mechanistic Interpretability Workshop**
+
+📄 [Paper](https://openreview.net/pdf?id=jJeWv00Zyg) | 💾 [Model Files (Google Drive)](https://drive.google.com/drive/folders/1zfp0aQ-1SquHTpJFoq8k9SsyQ80CgCWm?usp=sharing)
+
+## Abstract
+
+This repository contains the code to reproduce experiments from our paper on understanding goal representations in a maze-solving agent trained on the Procgen Heist environment. We use channel ablation and quantitative intervention experiments to identify "infrastructure channels" that represent critical game state (e.g., which keys have been collected) and demonstrate their causal influence on navigation decisions.
+
+## Key Findings
+
+- **Infrastructure Channels**: Specific CNN channels cleanly represent game state (key collection status)
+- **Causal Influence**: These channels directly affect the agent's goal-directed navigation
+- **Interpretable Representations**: Channel ablations reveal interpretable features rather than polysemantic encodings
+- **SAE Validation**: Sparse autoencoders confirm our findings and provide additional decomposition
 
 
-This repo accompanies our paper exploring how sparse autoencoders (SAEs) can disentangle goal representations in reinforcement learning agents.
 
-We train SAEs on convolutional layers of a CNN-based policy network trained on the Procgen Heist environment.
-Key findings include:
+## Repository Structure
 
-Successful steering via single-channel interventions
-
-Dead SAE channels that still steer the agent
-
-Multiplexed entity representations encoded via activation strength
-
-These results demonstrate how SAEs compress and organize behaviorally-relevant information—and offer insights into interpretability in multi-objective RL settings.
-
-
+```
+src/
+├── Experiments/
+│   ├── quantitative_intervention_experiment.py       # Main intervention experiments
+│   ├── quantitative_intervention_experiment_batched.py
+│   ├── channel_ablatation_experiments.py            # Channel ablation studies
+│   ├── zero_ablation_experiment.py                  # Baseline measurements
+│   └── sequential_intervention_experiment.py
+│
+├── SAE/
+│   ├── sae_cnn.py                                   # SAE architecture
+│   ├── sae_training.py                              # Training pipeline
+│   └── sae_spatial_intervention.py                  # SAE-based interventions
+│
+├── Interventions/
+│   ├── intervention_base.py                         # Base framework
+│   ├── direct_intervention.py                       # Direct channel manipulation
+│   └── base_model_intervention.py                   # Model-level interventions
+│
+├── Analysis/
+│   ├── analyze_activations.py                       # Activation statistics
+│   ├── plot_entity_distribution.py                  # Entity distribution plots
+│   └── plot_ablation_results.py                     # Ablation visualizations
+│
+└── Utils/
+    ├── helpers.py                                   # Model loading utilities
+    ├── heist.py                                     # Procgen environment wrappers
+    └── create_intervention_mazes.py                 # Custom maze generation
+```
 
 ## Prerequisites
 - Python 3.9 (specific version required)
 - Qt5 (for macOS users)
 - Git
 
-## Installation Options
+## Installation
 ### Option 1: Using a script (Recommended for Speed)
 
 We provide an automated setup script to install all dependencies, configure your environment, and prepare everything for running experiments:
@@ -105,3 +138,77 @@ python
 >>> import procgen_tools
 >>> import procgen
 ```
+
+## Model Files
+
+Download the pre-trained model checkpoints and SAE weights from [Google Drive](https://drive.google.com/drive/folders/1zfp0aQ-1SquHTpJFoq8k9SsyQ80CgCWm?usp=sharing):
+
+- `64_256_8_36001_0.pt` - IMPALA model checkpoint at step 35k (1.4 MB)
+- `conv3a/sae_checkpoint_step_2000000.pt` - SAE for conv3a layer (105 KB)
+- `conv4a/sae_checkpoint_step_2000000.pt` - SAE for conv4a layer (105 KB)
+
+Place the downloaded files in the appropriate directories:
+```bash
+mkdir -p base_models new_saes/conv3a new_saes/conv4a
+mv 64_256_8_36001_0.pt base_models/
+mv conv3a_sae_checkpoint_step_2000000.pt new_saes/conv3a/sae_checkpoint_step_2000000.pt
+mv conv4a_sae_checkpoint_step_2000000.pt new_saes/conv4a/sae_checkpoint_step_2000000.pt
+```
+
+## Reproducing Paper Experiments
+
+### Main Quantitative Intervention Experiments (Section 3)
+
+```bash
+python src/quantitative_intervention_experiment_batched.py
+```
+
+### Channel Ablation Studies (Section 4)
+
+```bash
+python src/channel_ablatation_experiments.py
+python src/zero_ablation_experiment.py
+```
+
+### SAE Training and Validation (Section 5)
+
+Train SAEs on conv3a and conv4a layers:
+```bash
+python src/sae_training.py --layer conv3a
+python src/sae_training.py --layer conv4a
+```
+
+Run SAE interventions:
+```bash
+python src/sae_spatial_intervention.py
+```
+
+### Generating Figures
+
+```bash
+python src/plot_entity_distribution.py
+python src/plot_ablation_results.py
+python src/analyze_activations.py
+```
+
+## Citation
+
+If you use this code or build upon our work, please cite:
+
+```bibtex
+@inproceedings{sturgeon2025understanding,
+  title={Understanding Goals in a Maze Solving Agent},
+  author={Sturgeon, Ben and others},
+  booktitle={NeurIPS 2025 Workshop on Mechanistic Interpretability},
+  year={2025},
+  url={https://openreview.net/pdf?id=jJeWv00Zyg}
+}
+```
+
+## License
+
+[To be added]
+
+## Contact
+
+For questions or issues, please open an issue on GitHub.
