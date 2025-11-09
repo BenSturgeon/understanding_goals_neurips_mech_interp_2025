@@ -15,11 +15,11 @@ import imageio # Add imageio import
 from PIL import Image # Ensure PIL is imported for resizing
 
 # Project imports
-from base_model_intervention import BaseModelInterventionExperiment
-from sae_spatial_intervention import SAEInterventionExperiment, ordered_layer_names as sae_ordered_layer_names
-from utils.environment_modification_experiments import create_multi_entity_no_locks_maze, create_trident_maze
-from utils import helpers, heist # Import helpers to use its functions
-from zero_ablation_classes import BaseModelZeroAblationExperiment, SAEZeroAblationExperiment # Import new classes
+from src.base_model_intervention import BaseModelInterventionExperiment
+from src.sae_spatial_intervention import SAEInterventionExperiment, ordered_layer_names as sae_ordered_layer_names
+from src.utils.environment_modification_experiments import create_multi_entity_no_locks_maze, create_trident_maze
+from src.utils import helpers, heist # Import helpers to use its functions
+from src.zero_ablation_classes import BaseModelZeroAblationExperiment, SAEZeroAblationExperiment # Import new classes
 
 # Constants
 ENTITY_CODE_DESCRIPTION = { 3: "gem", 4: "blue_key", 5: "green_key", 6: "red_key", 7: "blue_lock", 8: "green_lock", 9: "red_lock" }

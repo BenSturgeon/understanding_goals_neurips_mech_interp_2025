@@ -2,8 +2,8 @@
 import argparse
 import os
 import re # Added import for regex
-from sae_spatial_intervention import SAEInterventionExperiment, create_trajectory_based_intervention
-from sae_cnn import ordered_layer_names
+from src.sae_spatial_intervention import SAEInterventionExperiment, create_trajectory_based_intervention
+from src.sae_cnn import ordered_layer_names
 
 def parse_args():
     """Parse command line arguments"""

@@ -23,14 +23,14 @@ if not os.path.exists('src') and os.path.exists('../src'):
     print("Added parent directory to path")
 
 # Import helper functions from existing modules
-from utils.helpers import load_interpretable_model
-from sae_cnn import ConvSAE
-from feature_vis_sae import (
+from src.utils.helpers import load_interpretable_model
+from src.sae_cnn import ConvSAE
+from src.feature_vis_sae import (
     load_sae_from_checkpoint,
     SAEFeatureVisualizer,
     ordered_layer_names
 )
-from feature_vis_impala import (
+from src.feature_vis_impala import (
     total_variation, 
     jitter, 
     random_scale, 
@@ -39,7 +39,7 @@ from feature_vis_impala import (
     load_color_correlation_matrix, 
     get_num_channels
 )
-from extract_sae_features import replace_layer_with_sae
+from src.extract_sae_features import replace_layer_with_sae
 
 
 # %%

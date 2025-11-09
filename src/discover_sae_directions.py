@@ -2,10 +2,10 @@
 import torch
 import matplotlib.pyplot as plt
 import numpy as np
-from utils.helpers import load_interpretable_model
+from src.utils.helpers import load_interpretable_model
 import os
 from tqdm import tqdm
-from utils import heist
+from src.utils import heist
 import random
 import imageio
 from src.utils.environment_modification_experiments import ENTITY_TYPES, ENTITY_COLORS, ordered_layer_names

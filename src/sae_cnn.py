@@ -19,7 +19,7 @@ import re
 from PIL import Image
 
 
-from utils import helpers, heist
+from src.utils import helpers, heist
 
 def get_device():
     if t.cuda.is_available():

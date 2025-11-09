@@ -6,7 +6,7 @@ so the agent moves away from entities by default.
 
 import numpy as np
 import random
-from utils.create_intervention_mazes import create_custom_maze_sequence
+from src.utils.create_intervention_mazes import create_custom_maze_sequence
 
 
 def create_bias_corrected_fork_maze(bias_direction="up"):

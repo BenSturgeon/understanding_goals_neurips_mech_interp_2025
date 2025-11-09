@@ -7,11 +7,11 @@ import re
 import glob
 
 # Procgen environment and project utilities
-from utils import heist as heist_utils
-from utils import helpers 
+from src.utils import heist as heist_utils
+from src.utils import helpers 
 
 # SAE loading
-from sae_cnn import load_sae_from_checkpoint
+from src.sae_cnn import load_sae_from_checkpoint
 
 # --- Configuration ---
 NUM_RUNS_DEFAULT = 50

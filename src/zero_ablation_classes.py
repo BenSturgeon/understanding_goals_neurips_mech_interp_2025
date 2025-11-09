@@ -1,7 +1,7 @@
 import torch
-from utils import helpers
+from src.utils import helpers
 # Import the specific SAE loading function
-from sae_cnn import load_sae_from_checkpoint
+from src.sae_cnn import load_sae_from_checkpoint
 
 class BaseModelZeroAblationExperiment:
     """

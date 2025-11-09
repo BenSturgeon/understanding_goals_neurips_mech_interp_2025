@@ -1,5 +1,5 @@
-from utils import helpers
-from utils import heist
+from src.utils import helpers
+from src.utils import heist
 import random
 import numpy as np
 import imageio

@@ -9,13 +9,13 @@ from pathlib import Path
 from tqdm import tqdm
 import torch
 
-from sae_cnn import (
+from src.sae_cnn import (
     load_sae_from_checkpoint,
     ordered_layer_names,
     load_interpretable_model,
     get_module_by_path
 )
-from utils import heist
+from src.utils import heist
 
 def identify_dead_channels(sae, layer_number, num_samples=1000, batch_size=64, threshold=1e-6):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

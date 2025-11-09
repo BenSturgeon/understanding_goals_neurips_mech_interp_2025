@@ -2,14 +2,14 @@
 import argparse
 import os
 from direct_intervention import DirectInterventionExperiment
-from intervention_base import create_trajectory_based_intervention
-from sae_cnn import ordered_layer_names
+from src.intervention_base import create_trajectory_based_intervention
+from src.sae_cnn import ordered_layer_names
 import imageio
 
 from procgen import ProcgenEnv
 from procgen.gym_registration import make_env
 
-from utils.environment_modification_experiments import create_box_maze
+from src.utils.environment_modification_experiments import create_box_maze
 
 ENTITY_CODE_DESCRIPTION = {
     3: "gem",

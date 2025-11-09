@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import imageio
-from intervention_base import InterventionExperiment
+from src.intervention_base import InterventionExperiment
 
 
 

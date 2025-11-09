@@ -15,11 +15,11 @@ import sys # For muting stderr
 from contextlib import contextmanager # For muting stderr
 
 # Project imports
-from base_model_intervention import BaseModelInterventionExperiment
-from sae_spatial_intervention import SAEInterventionExperiment, ordered_layer_names
-from utils.create_intervention_mazes import create_box_maze
-from utils import heist
-from utils import helpers
+from src.base_model_intervention import BaseModelInterventionExperiment
+from src.sae_spatial_intervention import SAEInterventionExperiment, ordered_layer_names
+from src.utils.create_intervention_mazes import create_box_maze
+from src.utils import heist
+from src.utils import helpers
 
 # Constants
 ENTITY_CODE_DESCRIPTION = {

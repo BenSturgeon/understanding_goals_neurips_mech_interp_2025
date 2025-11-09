@@ -11,9 +11,9 @@ import imageio
 from tqdm import tqdm
 
 # Import local modules
-from utils.environment_modification_experiments import create_example_maze_sequence, ENTITY_TYPES, ENTITY_COLORS
-from utils import helpers
-from sae_cnn import load_sae_from_checkpoint, ordered_layer_names
+from src.utils.environment_modification_experiments import create_example_maze_sequence, ENTITY_TYPES, ENTITY_COLORS
+from src.utils import helpers
+from src.sae_cnn import load_sae_from_checkpoint, ordered_layer_names
 
 class EntityTrackingExperiment:
     def __init__(self, model_path, device=None):

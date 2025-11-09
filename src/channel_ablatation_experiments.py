@@ -4,11 +4,11 @@ import torch
 import os
 import matplotlib.pyplot as plt
 import numpy as np
-from sae_cnn import load_sae_from_checkpoint, ordered_layer_names
+from src.sae_cnn import load_sae_from_checkpoint, ordered_layer_names
 import imageio
 from src.utils.environment_modification_experiments import create_trident_maze
-from utils.helpers import run_episode_and_get_final_state
-from utils.heist import (
+from src.utils.helpers import run_episode_and_get_final_state
+from src.utils.heist import (
     EnvState,
     ENTITY_TYPES,
     KEY_COLORS

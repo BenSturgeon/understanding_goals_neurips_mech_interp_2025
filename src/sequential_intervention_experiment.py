@@ -12,12 +12,12 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 from procgen import ProcgenEnv # Needed for venv.env
-from utils import heist # Needed for state_from_venv
+from src.utils import heist # Needed for state_from_venv
 
-from sae_spatial_intervention import SAEInterventionExperiment, ordered_layer_names
-from utils.environment_modification_experiments import create_custom_maze_sequence
-from utils import helpers
-from utils.create_intervention_mazes import create_sequential_maze
+from src.sae_spatial_intervention import SAEInterventionExperiment, ordered_layer_names
+from src.utils.environment_modification_experiments import create_custom_maze_sequence
+from src.utils import helpers
+from src.utils.create_intervention_mazes import create_sequential_maze
 
 ENTITY_CODE_DESCRIPTION = {
     3: "gem",

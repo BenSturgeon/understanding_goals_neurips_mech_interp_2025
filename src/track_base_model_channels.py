@@ -8,8 +8,8 @@ import csv
 from tqdm import tqdm
 
 # Import local modules
-from utils.environment_modification_experiments import create_box_maze
-from utils import helpers
+from src.utils.environment_modification_experiments import create_box_maze
+from src.utils import helpers
 
 # Import analysis functions from track_object_channels.py
 from track_object_channels import EntityTrackingExperiment

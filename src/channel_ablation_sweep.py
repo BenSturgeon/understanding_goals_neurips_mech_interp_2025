@@ -11,7 +11,7 @@ import copy
 import sys
 
 import utils.helpers as helpers
-from sae_cnn import load_sae_from_checkpoint, ordered_layer_names
+from src.sae_cnn import load_sae_from_checkpoint, ordered_layer_names
 # Removed unused imageio and plt imports for now
 # import imageio
 # import matplotlib.pyplot as plt
@@ -19,8 +19,8 @@ from sae_cnn import load_sae_from_checkpoint, ordered_layer_names
 # Keep environment creation if needed later, but heist.create_venv used now
 from src.utils.create_intervention_mazes import create_fork_maze, create_corners_maze
 
-from utils.helpers import run_episode_and_get_final_state
-from utils.heist import (
+from src.utils.helpers import run_episode_and_get_final_state
+from src.utils.heist import (
     EnvState,
     ENTITY_TYPES,
     KEY_COLORS,

@@ -22,13 +22,13 @@ import sys
 import torch
 
 sys.path.append("../")  # This is added so we can import from the source folder
-from policies_impala import ImpalaCNN
-from interpretable_impala import CustomCNN as interpretable_CNN
+from src.policies_impala import ImpalaCNN
+from src.interpretable_impala import CustomCNN as interpretable_CNN
 
 # from src.policies_modified import ImpalaCNN
-from visualisation_functions import *
+from src.visualisation_functions import *
 
-from utils import heist
+from src.utils import heist
 
 
 def get_device():

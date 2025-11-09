@@ -3,9 +3,10 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import imageio
-from utils.environment_modification_experiments import create_specific_l_shaped_maze_env, create_box_maze
-from utils import helpers
-from sae_cnn import load_sae_from_checkpoint, ordered_layer_names
+from src.utils.environment_modification_experiments import create_specific_l_shaped_maze_env
+from src.utils.create_intervention_mazes import create_box_maze
+from src.utils import helpers
+from src.sae_cnn import load_sae_from_checkpoint, ordered_layer_names
 
 
 class SAEInterventionExperiment:

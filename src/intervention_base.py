@@ -4,9 +4,9 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import imageio
-from utils.environment_modification_experiments import create_specific_l_shaped_maze_env
-from utils import helpers
-from sae_cnn import ordered_layer_names
+from src.utils.environment_modification_experiments import create_specific_l_shaped_maze_env
+from src.utils import helpers
+from src.sae_cnn import ordered_layer_names
 
 
 class InterventionExperiment:

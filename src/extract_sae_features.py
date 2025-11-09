@@ -1,6 +1,6 @@
 # %%
 import sys
-from utils import helpers, heist
+from src.utils import helpers, heist
 import torch as t
 import torch.nn as nn
 import torch.nn.functional as F
