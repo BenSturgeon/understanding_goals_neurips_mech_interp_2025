@@ -585,15 +585,25 @@ def main():
                     captured_observations = trial_result.get("observations", [])
                     captured_activations_sequence = experiment.get_captured_activation_sequence()
 
+                    # +++ Add Debug Prints Here +++
+                    print(f"\nDEBUG: Raw lengths before GIF: Obs={len(captured_observations)}, Act={len(captured_activations_sequence)}")
+                    print(f"DEBUG: Trial outcome from run_trial: {trial_result.get('outcome', 'N/A')}, Steps: {trial_result.get('steps', 'N/A')}")
+                    # +++
+
                     # --- Fix: Align lists by removing the initial observation frame ---
                     if len(captured_observations) == len(captured_activations_sequence) + 1:
-                        print(f"DEBUG: Aligning lists. Removing first observation frame. Original lengths: Obs={len(captured_observations)}, Act={len(captured_activations_sequence)}")
+                        print(f"DEBUG: Aligning lists by removing first observation frame...")
                         captured_observations = captured_observations[1:] # Slice to remove the first element
                     # ---
+
+                    # +++ Add Debug Print After Alignment +++
+                    print(f"DEBUG: Lengths after alignment: Obs={len(captured_observations)}, Act={len(captured_activations_sequence)}")
+                    # +++
 
                     if captured_observations and captured_activations_sequence and len(captured_observations) == len(captured_activations_sequence):
                         combined_frames = []
                         num_frames = len(captured_observations)
+                        print(f"DEBUG: Starting GIF loop with num_frames = {num_frames}")
                         # --- Ensure PIL Image is available ---
                         try:
                             from PIL import Image
@@ -603,10 +613,15 @@ def main():
                              captured_observations = [] # Prevent further processing
                         # ---
 
-                        if captured_observations: # Proceed only if PIL was imported and obs exist
+                        if captured_observations:
                             for i in tqdm(range(num_frames), desc="Generating GIF frames", leave=False):
                                 obs_frame = captured_observations[i]
                                 act_tensor = captured_activations_sequence[i]
+
+                                # --- Add Debug Print Before Plotting ---
+                                print(f"DEBUG Frame {i}: Processing. Activation tensor stats: min={act_tensor.min():.2f}, max={act_tensor.max():.2f}, has_nan={torch.isnan(act_tensor).any()}")
+                                
+                                # ---
 
                                 act_image = plot_activations_to_image(
                                     act_tensor,
@@ -614,48 +629,41 @@ def main():
                                 )
 
                                 if act_image is not None:
-                                    # --- Restore Resizing and Concatenation ---
-                                    try:
-                                        # Get observation height for resizing
-                                        obs_h = obs_frame.shape[0]
-                                        obs_w = obs_frame.shape[1]
+                                    # Get observation height for resizing
+                                    obs_h = obs_frame.shape[0]
+                                    obs_w = obs_frame.shape[1]
 
-                                        # Resize activation image using PIL
-                                        act_pil = Image.fromarray(act_image)
-                                        # Calculate new width maintaining aspect ratio
-                                        act_h, act_w = act_image.shape[0], act_image.shape[1]
-                                        new_act_w = int(act_w * (obs_h / act_h))
-                                        act_resized_pil = act_pil.resize((new_act_w, obs_h), Image.Resampling.LANCZOS)
-                                        act_resized = np.array(act_resized_pil)
+                                    # Resize activation image using PIL
+                                    act_pil = Image.fromarray(act_image)
+                                    act_h, act_w = act_image.shape[0], act_image.shape[1]
+                                    new_act_w = int(act_w * (obs_h / act_h))
+                                    act_resized_pil = act_pil.resize((new_act_w, obs_h), Image.Resampling.LANCZOS)
+                                    act_resized = np.array(act_resized_pil)
 
-                                        # Pad observation width if activation image is wider
-                                        if new_act_w > obs_w:
-                                             pad_width = new_act_w - obs_w
-                                             # Pad with black color (0)
-                                             obs_frame_padded = np.pad(obs_frame, ((0,0), (0, pad_width), (0,0)), mode='constant', constant_values=0)
-                                        else:
-                                             obs_frame_padded = obs_frame
+                                    # Pad observation width if activation image is wider
+                                    if new_act_w > obs_w:
+                                        pad_width = new_act_w - obs_w
+                                        obs_frame_padded = np.pad(obs_frame, ((0,0), (0, pad_width), (0,0)), mode='constant', constant_values=0)
+                                    else:
+                                        obs_frame_padded = obs_frame
 
-                                        # Pad activation width if observation image is wider
-                                        if obs_w > new_act_w:
-                                             pad_width = obs_w - new_act_w
-                                             act_resized_padded = np.pad(act_resized, ((0,0), (0, pad_width), (0,0)), mode='constant', constant_values=0)
-                                        else:
-                                             act_resized_padded = act_resized
+                                    # Pad activation width if observation image is wider
+                                    if obs_w > new_act_w:
+                                        pad_width = obs_w - new_act_w
+                                        act_resized_padded = np.pad(act_resized, ((0,0), (0, pad_width), (0,0)), mode='constant', constant_values=0)
+                                    else:
+                                        act_resized_padded = act_resized
 
-
-                                        # Concatenate horizontally
-                                        combined_frame = np.concatenate((obs_frame_padded, act_resized_padded), axis=1)
-                                        combined_frames.append(combined_frame)
-                                        # --- End Restore ---
-                                    except Exception as resize_err:
-                                        print(f"Warning: Error resizing/combining frame {i}: {resize_err}")
+                                    # Concatenate horizontally
+                                    combined_frame = np.concatenate((obs_frame_padded, act_resized_padded), axis=1)
+                                    combined_frames.append(combined_frame)
                                 else:
                                     print(f"Warning: Skipping frame {i} due to activation plotting error.")
 
                             if combined_frames:
                                 vis_gif_filename = os.path.join(gif_dir, f"post_ablation_sae_activations_layer{args.layer_number}_group_{group_str_repr}.gif")
                                 try:
+                                    print(len(combined_frames))
                                     imageio.mimsave(vis_gif_filename, combined_frames, fps=10)
                                     print(f"Saved combined activation GIF to {vis_gif_filename}")
                                     visualization_gif_generated = True # Set flag AFTER successful save
@@ -664,7 +672,9 @@ def main():
                             else:
                                 print("Warning: No combined frames were generated for the activation GIF.")
                     else:
-                        print(f"Warning: Skipping activation GIF generation for trial {trial+1} due to missing data or inconsistent lengths between observations ({len(captured_observations if captured_observations else [])}) and activations ({len(captured_activations_sequence if captured_activations_sequence else [])}).")
+                        # +++ Add Debug Print for Skip +++
+                        print(f"DEBUG: Skipping GIF loop due to length mismatch or empty lists.")
+                        # +++
                 # --- End GIF Generation ---
 
                 # Calculate success for this trial
