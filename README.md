@@ -64,9 +64,8 @@ This is designed for running on a remote linux machine and includes steps for ge
 It uses UV and will install it automatically. It will also install QT5 which is a necessary dependency for building Procgen. This is needed on both mac and Linux.
 
 ```bash
-chmod +x automated_setup.sh
-
-./automated_setup.sh
+chmod +x remote_setup.sh
+./remote_setup.sh
 ```
 
 ### Option 2: Manual installation using uv 
