@@ -6,14 +6,15 @@
 
 ## Abstract
 
-This repository contains the code to reproduce experiments from our paper on understanding goal representations in a maze-solving agent trained on the Procgen Heist environment. We use channel ablation and quantitative intervention experiments to identify "infrastructure channels" that represent critical game state (e.g., which keys have been collected) and demonstrate their causal influence on navigation decisions.
+This repository contains the code to reproduce experiments from our paper on understanding how a maze-solving agent trained on Procgen Heist represents multiple entities through **activation strength multiplexing**. We discover that individual CNN channels encode different game entities (keys, gems) by varying their activation magnitude rather than using separate channels for each entity. This efficient encoding strategy allows the agent to represent multiple goal-relevant objects within the same channels, with activation strength determining which entity is present.
 
 ## Key Findings
 
-- **Infrastructure Channels**: Specific CNN channels cleanly represent game state (key collection status)
-- **Causal Influence**: These channels directly affect the agent's goal-directed navigation
-- **Interpretable Representations**: Channel ablations reveal interpretable features rather than polysemantic encodings
-- **SAE Validation**: Sparse autoencoders confirm our findings and provide additional decomposition
+- **Entity Multiplexing**: Single CNN channels represent multiple entities (blue key, green key, gem) by encoding them through different activation strengths rather than separate channels
+- **Activation Strength Encoding**: The magnitude of channel activation determines which entity is present, enabling efficient representation of multiple goal states
+- **Infrastructure Channels**: Critical channels that causally influence navigation decisions based on which keys have been collected
+- **Interpretable Representations**: Clean, disentangled representations rather than polysemantic features
+- **SAE Validation**: Sparse autoencoders confirm multiplexed entity representations and provide additional decomposition
 
 
 
